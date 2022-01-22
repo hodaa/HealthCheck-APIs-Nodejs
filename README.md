@@ -1,24 +1,20 @@
-## Hotels 
-This is  an API that compare and sort a massive amount of data from different 
-sources and returns a JSON response that contains a list of
-hotel rooms (cheapest to most expensive).
+## Montior  Api
+This is an uptime monitoring RESTful API server which allows authorized users to enter URLs 
+they want monitored, and get detailed uptime reports about their availability, average response time, and total uptime/downtime.
+
+
 
 ## Installation
 
 * `docker-compose up -d`
 
-From PHP image
-* `docker-compose exec php bash`
-    * `composer install`
-    * `php artisan key:generate`
 
 
-
-## Usage
+## Documentation
 
 Hit this url using Get Method
 
-`http://localhost:8081/api/v1/hotels`
+`http://localhost:4000/docs`
 
 
 
@@ -56,10 +52,10 @@ Run
 
 
 ## Tools
-* PHP7.4
-* Laravel
+* Express
+* Mongo
 * Docker
-* phpunit
+* Swagger
 
 
 # standard --fix
