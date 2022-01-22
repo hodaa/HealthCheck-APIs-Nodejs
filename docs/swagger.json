@@ -1,0 +1,196 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Monitor App API",
+      "description": "Uptime monitoring RESTful API server which allows authorized users to enter URLs they want monitored",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:4000",
+    "basePath": "/api/v1",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "API for users in the system"
+      }
+
+    ],
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "securityDefinitions": {
+        "ApiKeyAuth":{
+          "type": "apiKey",
+          "in": "headers",
+          "name": "authorization"
+        }
+    },
+    "paths": {
+      "/users/register": {
+        "post": {
+          "summary": "Register user",
+          "tags": [
+            "Users"
+          ],
+          "description": "Register user in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "Register user",
+              "schema": {
+                "$ref": "#/definitions/UserRegister"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "201": {
+              "description": "Register Success",
+              "schema": {
+                "$ref": "#/definitions/UserSuccess"
+              }
+            },
+            "422":{
+              "description": "Register Inputs are not valid!!"
+            },
+            "400":{
+              "description": "Register details are not valid!!",
+              "schema": {
+                "$ref": "#/definitions/UserRegister"
+              }
+            }
+          }
+        }
+      },
+      "/users/confirm/{confirmation_code}": {
+        "get": {
+          "summary": "Confirm Email for  user",
+          "tags": [
+            "Users"
+          ],
+          "description": "Confirm Email for  user",
+          "parameters": [
+            {
+              "name": "confirmation_code",
+              "in": "path",
+              "description": "Confirm user",
+              "schema": {
+                "$ref": "#/definitions/ConfirmEmail"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Register Success",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "404": {
+              "description": "User not Exists",
+              "schema": {
+                "$ref": "#/definitions/UserSuccess"
+              }
+            }
+          }
+        }
+      },
+
+    "/users/login": {
+      "post": {
+        "summary": "Login user",
+        "tags": [
+          "Users"
+        ],
+        "description": "Login user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Login user",
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Login Success"
+          },
+          "422":{
+            "description": "Unprocessable Entity"
+          },
+          "400":{
+            "description": "Invalid Credentials!"
+          },
+          "500":{
+            "description": "User login failed!!"
+          }
+        }
+      }
+    }
+  },
+
+    "definitions": {
+      "UserLogin": {
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "UserRegister":{
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+          
+        }
+      },
+      "ConfirmEmail":{
+        "properties": {
+          "confirmation_code": {
+            "type": "string"
+          }
+        }
+      },
+      "UserSuccess":{
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+  }
+}

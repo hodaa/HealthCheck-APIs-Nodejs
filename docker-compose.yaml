@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+
+
+  nodejs:
+    # restart: always
+    build: .
+    ports:
+      - 4000:4000
+    volumes:
+      - ./:/code
+
+
+  db:
+    image: mongo
+    ports:
+      - 27018:27017
+    hostname: db
+    volumes:
+      - data:/data/db
+      - config:/data/configdb
+
+
+  mongo-express:
+      image: mongo-express
+      ports:
+        - 8082:8081
+      depends_on:
+        - "db"
+      environment:
+        - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+        - ME_CONFIG_MONGODB_URL=mongodb://db:27017
+      #   - VCAP_APP_PORT=8082
+      #   - ME_CONFIG_MONGODB_ENABLE_ADMIN=TRUE
+      #   - VCAP_APP_HOST=localhost
+      restart: unless-stopped
+      
+  
+volumes:
+  data:
+  config:
