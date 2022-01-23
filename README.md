@@ -46,10 +46,6 @@ Hit this url using Get Method
 From Nodejs image
 * `npm test`
 
-Run
-
-    vendor/phpunit/bin
-
 
 ## Tools
 * Express

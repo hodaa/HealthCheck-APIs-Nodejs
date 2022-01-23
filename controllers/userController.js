@@ -14,7 +14,6 @@ const crypto = require('crypto')
  */
 exports.register = async (req, res, next) => {
   const { first_name, last_name, email, password } = req.body
-  console.log(first_name)
 
   const oldUser = await User.findOne({ email })
   if (oldUser) return res.status(400).send({ message: 'User already registered.' })
@@ -45,7 +44,6 @@ exports.register = async (req, res, next) => {
 
   user.save(function (err, doc) {
     if (err) return console.error(err)
-    console.log('Document inserted successfully!')
   })
 
   const body = `<h2>Hello ${first_name}</h2><p>Thank you for subscribing.
@@ -63,14 +61,11 @@ exports.register = async (req, res, next) => {
  * @param {*} next
  */
 exports.verify = (req, res, next) => {
-  // console.log(req.params.confirmation_code)
   User.findOne({ confirmation_code: req.params.confirmation_code })
     .then((user) => {
-      // console.log(user)
       if (!user) {
         return res.status(404).send({ message: 'User Not found.' })
       }
-      console.log(req.params.confirmation_code)
       user.status = 'Active'
       user.confirmation_code = null
       user.save((err) => {
@@ -109,7 +104,7 @@ exports.login = async (req, res) => {
       res.status(200).json({ message: 'You logged in successfully', token: token })
     }
     // return new user
-    res.status(400).send({ message: 'Invalid Credentials' })
+    res.status(400).json({ message: 'Invalid Credentials' })
   } catch (err) {
     console.log(err)
   }

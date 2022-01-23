@@ -11,7 +11,6 @@ const transport = nodemailer.createTransport({
 })
 
 module.exports.sendEmail = (email, subject, body) => {
-  console.log(email)
   transport.sendMail({
     from: authConfig.email,
     to: email,

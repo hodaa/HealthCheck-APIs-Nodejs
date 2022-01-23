@@ -5,7 +5,7 @@ exports.verifyToken = (req, res, next) => {
   const token = req.headers['x-access-token']
 
   if (!token) {
-    return res.status(403).send({ message: 'Token is required for authentication'})
+    return res.status(403).send({ message: 'Token is required for authentication' })
   }
   try {
     const decoded = jwt.verify(token, config.TOKEN_KEY)
