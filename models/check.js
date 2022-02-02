@@ -6,11 +6,7 @@ const checkSchema = new mongoose.Schema({
   protocol: { type: String, default: 'HTTP' },
   path: { type: String, default: null },
   port: { type: String, default: null },
-  webhook: {
-    type: String,
-    enum: ['Pending', 'Active'],
-    default: 'Pending'
-  },
+  webhook: { type: String },
   timeout: { type: String, default: 5 },
   interval: { type: String, default: 10 },
   threshold: { type: String, default: 1 },
@@ -19,7 +15,8 @@ const checkSchema = new mongoose.Schema({
   assert: { type: String, default: null },
   tags: { type: String, default: null },
   ignoreSSL: { type: Boolean, default: 0 },
-  user_id: { type: String }
+  user_id: { type: String },
+  notification_method: { type: String, default: 'email' }
 })
 
 module.exports = mongoose.model('Check', checkSchema)

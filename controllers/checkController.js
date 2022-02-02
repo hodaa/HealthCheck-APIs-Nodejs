@@ -27,10 +27,9 @@ const config = process.env
  * POST /Check to save a new Check.
  */
 exports.postCheck = (req, res, next) => {
-  const user = jwt.verify(req.body.token, config.TOKEN_KEY)
+  const user = jwt.verify(req.headers.token, config.TOKEN_KEY)
   const data = req.body
   data.user_id = user.user_id
-  console.log(data)
 
   const newCheck = new Check(data)
 
@@ -82,13 +81,13 @@ exports.getCheck = (req, res) => {
  * DELETE /Check/:id to delete a Check given its id.
  */
 exports.deleteCheck = (req, res) => {
-  Check.remove({ _id: req.params.id }, (err, result) => {
+  Check.remove({ _id: req.params.id }, (_err, result) => {
     res.json({ message: 'Check successfully deleted!', result })
   })
 }
 
 /*
- * PUT /Check/:id to updatea a Check given its id
+ * PUT /Check/:id to update a Check given its id
  */
 exports.updateCheck = (req, res) => {
   Check.findById({ _id: req.params.id }, (err, Check) => {

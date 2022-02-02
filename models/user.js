@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema({
   token: { type: String },
   status: {
     type: String,
-    enum: ['Pending', 'Active'],
-    default: 'Pending'
+    enum: ['up', 'down'],
+    default: 'up'
   },
   confirmation_code: { type: String, unique: true }
 })

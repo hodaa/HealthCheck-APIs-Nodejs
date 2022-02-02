@@ -50,7 +50,7 @@ describe('Users Apis', () => {
         res.should.have.status(400)
         res.body.should.be.a('object')
         res.body.should.have.property('message')
-        res.body.should.have.property('message').eql('Invalid Credentials');
+        res.body.should.have.property('message').eql('Invalid Credentials')
         done()
       })
   })
@@ -64,19 +64,19 @@ describe('Users Apis', () => {
         res.body.should.be.a('object')
         res.body.should.have.property('errors').eql([
           {
-            "msg": "Invalid email",
-            "param": "email",
-            "location": "body"
+            msg: 'Invalid email',
+            param: 'email',
+            location: 'body'
           },
           {
-            "msg": "Invalid email",
-            "param": "email",
-            "location": "body"
+            msg: 'Invalid email',
+            param: 'email',
+            location: 'body'
           },
           {
-            "msg": "password is required",
-            "param": "password",
-            "location": "body"
+            msg: 'password is required',
+            param: 'password',
+            location: 'body'
           }
         ])
         // res.body.should.have.property('message').eql('Invalid Credentials');
